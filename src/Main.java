@@ -1,15 +1,24 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Scanner scanner = new Scanner(System.in);
+        double[] vector1 = readVector(scanner,4);
+        double[] vector2 = readVector(scanner,4);
+        double distance = 0;
+        for(int i =0;i<4;i++){
+            distance+=Math.pow(vector2[i]-vector1[i],2);
         }
+        distance=Math.sqrt(distance);
+        System.out.println("Distance = "+ distance);
+
+    }
+    private static double[] readVector(Scanner sc, int n){
+        double[] vector = new double[n];
+        for(int i = 0;i<n;i++){
+            System.out.println("Input double("+(i+1)+")");
+            vector[i] = sc.nextDouble();
+        }
+        return vector;
     }
 }
