@@ -11,16 +11,21 @@ public class TrainingList {
         Scanner fileScanner = new Scanner(new File(filePath));
         while(fileScanner.hasNextLine()){
             String line  = fileScanner.nextLine();
-            if(line.isEmpty()) continue;
+            if(line.trim().isEmpty()) continue;
 
-            String[] parts = line.split("\\s+");
+            String[] parts = line.trim().split("\\s+");
             double[] attributes = new double[parts.length-1];
             String flowerName = parts[parts.length-1];
             for(int i = 0;i<attributes.length;i++){
-                attributes[i] = Double.parseDouble(parts[i].replace(',','.'));
+                attributes[i] = Double.parseDouble(parts[i].replace(",","."));
             }
             this.data.add(new Observation(attributes,flowerName));
         }
         fileScanner.close();
+    }
+    public void show(){
+        for(Observation ob : data){
+            ob.show();
+        }
     }
 }
