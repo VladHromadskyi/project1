@@ -6,6 +6,10 @@ public class Observation {
         this.attributes = attributes;
         this.flowerName = flowerName;
     }
+    public Observation(double[] attributes){
+        this.attributes = attributes;
+        this.flowerName = null;
+    }
 
     public double[] getAttributes() {
         return attributes;
@@ -17,7 +21,7 @@ public class Observation {
         for(int i = 0;i<attributes.length;i++){
             System.out.print(attributes[i] + " ");
         }
-        System.out.println(flowerName+"\n");
+        System.out.println(flowerName);
     }
     public double distance(Observation obj){
         if(this.attributes.length!=obj.attributes.length){

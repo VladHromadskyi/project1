@@ -13,4 +13,9 @@ public class Neighbor implements Comparable<Neighbor>{
 
     public Observation getObservation(){return this.observation;}
     public double getDistance(){return this.distance;}
+    public void show(){
+        System.out.print("{ Vector: ");
+        observation.show();
+        System.out.println("Distance: "+distance+"}");
+    }
 }
