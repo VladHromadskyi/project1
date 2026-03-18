@@ -28,4 +28,5 @@ public class TrainingList {
             ob.show();
         }
     }
+    public List<Observation> getData(){return this.data;}
 }
