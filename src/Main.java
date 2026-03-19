@@ -17,8 +17,14 @@ public class Main {
         testList.show();
         System.out.println("Test:");
         double rightClassify =0;
+        int k = 121;
+        if(k>trainingList.getData().size()){
+            System.out.println("Variable k is more than the amount of neighbors, " +
+                    "so variable k was decreased to " + trainingList.getData().size());
+            k = trainingList.getData().size();
+        }
         for(Observation observation : testList.getData()){
-            if(classify(trainingList, observation, 3).equals(observation.getFlowerName()))rightClassify++;
+            if(classify(trainingList, observation, k).equals(observation.getFlowerName()))rightClassify++;
         }
         System.out.println("Accuracy: " + (rightClassify/testList.getData().size()*100)+"%");
         //--------------------------------------------------------
