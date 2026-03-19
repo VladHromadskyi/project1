@@ -11,9 +11,16 @@ public class Main {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Iris-training:");
         trainingList.show();
-        System.out.println();
+        System.out.println("Iris-test:");
         testList.show();
+        System.out.println("Test:");
+        double rightClassify =0;
+        for(Observation observation : testList.getData()){
+            if(classify(trainingList, observation, 3).equals(observation.getFlowerName()))rightClassify++;
+        }
+        System.out.println("Accuracy: " + (rightClassify/testList.getData().size()*100)+"%");
         //--------------------------------------------------------
 //        System.out.println("New test");
 //        Scanner sc = new Scanner(System.in);
@@ -30,15 +37,12 @@ public class Main {
         return vector;
     }
 
-    private static void classify(DataList trainingList, Observation obs, int k){
+    private static String classify(DataList trainingList, Observation obs, int k){
         List<Neighbor> neighborList = new ArrayList<>();
         for(Observation ob : trainingList.getData()){
             neighborList.add(new Neighbor(ob,ob.distance(obs)));
         }
         Collections.sort(neighborList);
-        for(Neighbor n : neighborList){
-            n.show();
-        }
         //----------------------------------------------
         Map<String, Integer> map = new HashMap<>();
         for(int i = 0;i<k;i++){
@@ -54,7 +58,8 @@ public class Main {
                 winner = entry.getKey();
             }
         }
-        obs.setFlowerName(winner);
-        obs.show();
+        Observation observation = new Observation(obs.getAttributes(),winner);
+        observation.show();
+        return winner;
     }
 }
