@@ -23,6 +23,7 @@ public class Main {
         System.out.println("\nAccuracy test:");
         System.out.print("Input value of \"k\": ");
         int k = sc.nextInt();
+        sc.nextLine();
         double rightClassify =0;
         if(k>trainingList.getData().size()){
             System.out.println("Variable k is more than the amount of neighbors, " +
