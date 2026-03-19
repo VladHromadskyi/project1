@@ -2,6 +2,9 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
+    static final Scanner sc = new Scanner(System.in);
+    static final Random random = new Random();
+
     public static void main(String[] args) {
         DataList trainingList = null;
         DataList testList = null;
@@ -11,13 +14,16 @@ public class Main {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Iris-training:");
-        trainingList.show();
-        System.out.println("Iris-test:");
-        testList.show();
-        System.out.println("Test:");
+
+//        System.out.println("\nIris-training data:");
+//        trainingList.show();
+//        System.out.println("\nIris-test data:");
+//        testList.show();
+
+        System.out.println("\nAccuracy test:");
+        System.out.print("Input value of \"k\": ");
+        int k = sc.nextInt();
         double rightClassify =0;
-        int k = 7;
         if(k>trainingList.getData().size()){
             System.out.println("Variable k is more than the amount of neighbors, " +
                     "so variable k was decreased to " + trainingList.getData().size());
@@ -26,12 +32,15 @@ public class Main {
         for(Observation observation : testList.getData()){
             if(classify(trainingList, observation, k).equals(observation.getFlowerName()))rightClassify++;
         }
+        System.out.println("\nAmount of right classifications: "+rightClassify+"\\"+testList.getData().size());
         System.out.println("Accuracy: " + (rightClassify/testList.getData().size()*100)+"%");
         //--------------------------------------------------------
-//        System.out.println("New test");
-//        Scanner sc = new Scanner(System.in);
-//        double[] arr = readVector(sc,4);
-//        classify(trainingList,new Observation(arr),7);
+//        while(){
+//            System.out.println("");
+//            Scanner sc = new Scanner(System.in);
+//            double[] arr = readVector(sc,4);
+//            classify(trainingList,new Observation(arr),7);
+//        }
     }
 
     private static double[] readVector(Scanner sc, int n){
@@ -65,10 +74,11 @@ public class Main {
         for(Map.Entry<String, Integer> entry: map.entrySet()){
             if(maxVotes == entry.getValue()) tiedWinners.add(entry.getKey());
         }
-        Random random = new Random();
         int randomIndex = random.nextInt(tiedWinners.size());
-        Observation observation = new Observation(obs.getAttributes(),tiedWinners.get(randomIndex));
-        observation.show();
+
+//        Observation observation = new Observation(obs.getAttributes(),tiedWinners.get(randomIndex));
+//        observation.show();
+
         return tiedWinners.get(randomIndex);
     }
 }
