@@ -35,12 +35,36 @@ public class Main {
         System.out.println("\nAmount of right classifications: "+rightClassify+"\\"+testList.getData().size());
         System.out.println("Accuracy: " + (rightClassify/testList.getData().size()*100)+"%");
         //--------------------------------------------------------
-//        while(){
-//            System.out.println("");
-//            Scanner sc = new Scanner(System.in);
-//            double[] arr = readVector(sc,4);
-//            classify(trainingList,new Observation(arr),7);
-//        }
+        System.out.println("\n--- Manual Vector Input Mode ---");
+        System.out.println("Enter attributes separated by space (e.g., 5.1 3.5 1.4 0.2)");
+        System.out.println("Type 'exit' to finish.");
+        while(true){
+            System.out.print("\nInput attributes: ");
+            String input = sc.nextLine().trim();
+
+            if (input.equalsIgnoreCase("exit")) {
+                System.out.println("Exiting manual mode...");
+                break;
+            }
+            try {
+                String[] parts = input.split("\\s+");
+
+                double[] userVector = new double[parts.length];
+                for (int i = 0; i < parts.length; i++) {
+                    userVector[i] = Double.parseDouble(parts[i].replace(',', '.'));
+                }
+
+                Observation userObs = new Observation(userVector);
+                String predictedClass = classify(trainingList, userObs, k);
+
+                System.out.println("Result of classification: " + predictedClass);
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Please enter only numbers separated by spaces.");
+            } catch (Exception e) {
+                System.out.println("An unexpected error occurred: " + e.getMessage());
+            }
+        }
     }
 
     private static double[] readVector(Scanner sc, int n){
