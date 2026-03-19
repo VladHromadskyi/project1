@@ -17,7 +17,7 @@ public class Main {
         testList.show();
         System.out.println("Test:");
         double rightClassify =0;
-        int k = 121;
+        int k = 7;
         if(k>trainingList.getData().size()){
             System.out.println("Variable k is more than the amount of neighbors, " +
                     "so variable k was decreased to " + trainingList.getData().size());
@@ -55,17 +55,20 @@ public class Main {
             String flowerName = neighborList.get(i).getObservation().getFlowerName();
             map.put(flowerName,map.getOrDefault(flowerName,0)+1);
         }
-
-        String winner = null;
         int maxVotes = -1;
-        for(Map.Entry<String,Integer> entry : map.entrySet()){
-            if(entry.getValue()>maxVotes){
-                maxVotes = entry.getValue();
-                winner = entry.getKey();
+        for(Integer var : map.values()){
+            if(var>maxVotes){
+                maxVotes = var;
             }
         }
-        Observation observation = new Observation(obs.getAttributes(),winner);
+        List<String> tiedWinners = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry: map.entrySet()){
+            if(maxVotes == entry.getValue()) tiedWinners.add(entry.getKey());
+        }
+        Random random = new Random();
+        int randomIndex = random.nextInt(tiedWinners.size());
+        Observation observation = new Observation(obs.getAttributes(),tiedWinners.get(randomIndex));
         observation.show();
-        return winner;
+        return tiedWinners.get(randomIndex);
     }
 }
