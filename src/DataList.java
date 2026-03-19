@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TrainingList {
+public class DataList {
     private List<Observation> data = new ArrayList<>();
 
-    public TrainingList(String filePath)throws FileNotFoundException {
+    public DataList(String filePath)throws FileNotFoundException {
         Scanner fileScanner = new Scanner(new File(filePath));
         while(fileScanner.hasNextLine()){
             String line  = fileScanner.nextLine();
