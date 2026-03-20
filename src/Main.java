@@ -87,7 +87,7 @@ public class Main {
         Map<String, Integer> map = new HashMap<>();
         for(int i = 0;i<k;i++){
             String flowerName = neighborList.get(i).getObservation().getFlowerName();
-            map.put(flowerName,map.getOrDefault(flowerName,0)+1);
+            map.put(flowerName, Integer.valueOf(map.getOrDefault(flowerName, Integer.valueOf(0))+1));
         }
         int maxVotes = -1;
         for(Integer var : map.values()){
